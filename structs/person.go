@@ -5,25 +5,18 @@ import (
 	"fmt"
 )
 
-const (
-	MIN_NAME_CHARS = 2
-	MIN_AGE        = 0
-)
+const MIN_NAME_LENGTH = 2
 
 type Person struct {
 	// private fields (encapsulation)
 	firstName string
 	lastName  string
-	age       int
+	age       byte //alias for type uint8 (just to know)
 }
 
-func NewPerson(firstName, lastName string, age int) (*Person, error) {
-	if len(firstName) < MIN_NAME_CHARS || len(lastName) < MIN_NAME_CHARS {
+func NewPerson(firstName, lastName string, age byte) (*Person, error) {
+	if len(firstName) < MIN_NAME_LENGTH || len(lastName) < MIN_NAME_LENGTH {
 		return nil, errors.New("\nerror: invalid name\nmsg: first and last name must have at least 2 characters")
-	}
-
-	if age < MIN_AGE {
-		return nil, errors.New("\nerror: invalid age\nmsg: must not be negative")
 	}
 
 	return &Person{
@@ -52,12 +45,8 @@ func (p *Person) SetLastName(lastName string) error {
 	return nil
 }
 
-func (p *Person) SetAge(age int) error {
-	if age < 0 {
-		return errors.New("\nerror: invalid age\nmsg: age must not be negative")
-	}
+func (p *Person) SetAge(age byte) {
 	p.age = age
-	return nil
 }
 
 // Get Methods
@@ -73,7 +62,7 @@ func (p *Person) GetFullName() string {
 	return fmt.Sprintf("%s %s", p.firstName, p.lastName)
 }
 
-func (p *Person) GetAge() int {
+func (p *Person) GetAge() byte {
 	return p.age
 }
 
