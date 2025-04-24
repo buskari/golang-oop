@@ -1,6 +1,9 @@
 package structs
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Person struct {
 	// private fields (encapsulation)
@@ -18,16 +21,30 @@ func NewPerson(firstName, lastName string, age int) *Person {
 }
 
 // Set Methods
-func (p *Person) SetFirstName(firstName string) {
+func (p *Person) SetFirstName(firstName string) error {
+	if len(firstName) < 2 {
+		return errors.New("first name must have at least 2 characters")
+	}
+
 	p.firstName = firstName
+	return nil
 }
 
-func (p *Person) SetLastName(lastName string) {
+func (p *Person) SetLastName(lastName string) error {
+	if len(lastName) < 2 {
+		return errors.New("last name must have at least 2 characters")
+	}
+
 	p.lastName = lastName
+	return nil
 }
 
-func (p *Person) SetAge(age int) {
+func (p *Person) SetAge(age int) error {
+	if age < 0 {
+		return errors.New("age must not be negative")
+	}
 	p.age = age
+	return nil
 }
 
 // Get Methods
