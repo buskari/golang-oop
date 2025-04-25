@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	p, err := structs.NewPerson("A", "Buscariolli", 36)
+	p, err := structs.NewPerson("Andris", "Buscariolli", 36)
 	if err != nil {
 		log.Fatal(err)
 	}
