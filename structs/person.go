@@ -14,6 +14,7 @@ type Person struct {
 	age       byte //alias for type uint8 (just to know)
 }
 
+// Constructor
 func NewPerson(firstName, lastName string, age byte) (*Person, error) {
 	if len(firstName) < MIN_NAME_LENGTH || len(lastName) < MIN_NAME_LENGTH {
 		return nil, errors.New("\nerror: invalid name\nmsg: first and last name must have at least 2 characters")
@@ -26,7 +27,7 @@ func NewPerson(firstName, lastName string, age byte) (*Person, error) {
 	}, nil
 }
 
-// Set Methods
+// Setters
 func (p *Person) SetFirstName(firstName string) error {
 	if len(firstName) < 2 {
 		return errors.New("\nerror: invalid name\nmsg: first name must have at least 2 characters")
@@ -49,20 +50,20 @@ func (p *Person) SetAge(age byte) {
 	p.age = age
 }
 
-// Get Methods
-func (p *Person) GetFirstName() string {
+// Getters
+func (p *Person) FirstName() string {
 	return p.firstName
 }
 
-func (p *Person) GetLastName() string {
+func (p *Person) LastName() string {
 	return p.lastName
 }
 
-func (p *Person) GetFullName() string {
+func (p *Person) FullName() string {
 	return fmt.Sprintf("%s %s", p.firstName, p.lastName)
 }
 
-func (p *Person) GetAge() byte {
+func (p *Person) Age() byte {
 	return p.age
 }
 
